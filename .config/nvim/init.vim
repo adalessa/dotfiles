@@ -132,6 +132,7 @@ nnoremap <silent><leader>pf :call PhpCsFixerFixFile()<cr>
 "NERDTree
 let NERDTreeHijackNetrw = 0
 nmap <leader>1 :NERDTreeToggle<cr>
+let NERDTreeWinPos = "right"
 
 "Syntastic
 set statusline+=%#warningmsg#
