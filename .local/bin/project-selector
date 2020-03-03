@@ -1,0 +1,13 @@
+#!/bin/sh
+
+project=$(ls ~/code | dmenu -l 20 )
+
+dir=$HOME/code/$project
+
+[ -z $dir ] && exit;
+
+cd $dir
+
+cmd="tmux new -s $project nvim . -S"
+
+$TERMINAL -c ide -e $cmd
