@@ -58,7 +58,7 @@ Plug 'jwalton512/vim-blade'
 " Status Bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides' 
+Plug 'nathanaelkane/vim-indent-guides'
 
 " TagBar
 Plug 'majutsushi/tagbar'
@@ -72,7 +72,7 @@ Plug 'freitass/todo.txt-vim'
 Plug 'mxw/vim-jsx'
 
 " Themes
-Plug 'dylnmc/novum.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -88,7 +88,7 @@ set undofile
 set number
 set relativenumber
 
-colorscheme novum
+colorscheme nord
 
 set tabstop=4
 set shiftwidth=4
@@ -213,7 +213,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " airline
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16_default'
+let g:airline_theme='nord'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 " set laststatus=1
