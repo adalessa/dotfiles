@@ -1,0 +1,178 @@
+[color]
+white = #FFFFFF
+red = #e53935
+light_green = #28bd6b
+dunno = #5c889c
+shade1 = #0f111a
+bground = #AA16212C
+fground = #b7d3ee
+accent = #31323a
+modulefg = #f7f7f7
+modulefg-alt = #f7f7f7
+
+[bar/mon1]
+dpi = 192
+monitor = DisplayPort-0
+width                    = 100%
+height                   = 25
+radius                   = 0
+line-size                = 0
+bottom                   = false
+cursor-click = pointer
+wm-restack = bspwm
+
+fixed-center = true
+;; the actual font
+font-0 = "Hack:size=6:antialias=true;2"
+font-1 = "Hack Nerd Font Mono:pixelsize=10:antialias=true:autohint=true;3"
+
+override-redirect = true
+offset-x = 0
+offset-y = 0
+screenchange-reload      = true
+throttle-output          = 3
+throttle-output-for      = 7
+throttle-input-for       = 20
+padding-left             = 0
+padding-right            = 0
+module-margin-left       = 1
+module-margin-right      = 1
+
+background = ${color.bground}
+foreground = ${color.fground}
+overline-size = 2
+overline-color = ${color.accent}
+modules-left = workspaces
+modules-center = title
+;modules-right = Playing temp battery volume backlight wifi weather date
+modules-right = wifi volume date
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;temp, battery, sound, light, wifi, time, weather, time
+
+
+[bar/mon2]
+inherit = bar/mon1
+dpi = 250
+monitor = DisplayPort-1
+
+modules-left = workspaces
+modules-center = title
+modules-right = mpd temperature wifi volume date
+tray-position = right
+tray-padding = 2
+
+[module/Playing]
+type = custom/script
+exec = ~/.config/bin/playing.sh
+format-prefix = " "
+interval = 0.1
+label-font = 0
+click-left = sp play
+format-padding = 1
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song> <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev =
+icon-stop =
+icon-play =
+icon-pause =
+icon-next =
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${color.red}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${color.fground}
+
+
+[module/volume]
+type = internal/pulseaudio
+format-volume =<ramp-volume> <label-volume>
+format-muted = 0%
+ramp-volume-0 =
+ramp-volume-1 =
+ramp-volume-2 =
+
+
+[module/date]
+type = internal/date
+time = %H:%M
+time-alt = %a %d %b
+label =" %time% "
+
+
+[module/title]
+type = internal/xwindow
+format = <label>
+format-padding = 1
+label = " %title%"
+label-maxlen = 30
+label-empty = "Roronoa Zoro"
+
+[module/wifi]
+type = internal/network
+interface = wlp3s0f0u4
+interval = 3.0
+
+format-connected =<label-connected>
+label-connected =%downspeed:9% %upspeed:9% [%signal%]
+
+[module/workspaces]
+type = internal/bspwm
+pin-workspaces = true
+ws-icon-0 = I;爵
+ws-icon-1 = II;
+ws-icon-2 = III;
+ws-icon-3 = IV;
+ws-icon-4 = V;
+
+
+ws-icon-5 = VI;
+ws-icon-6 = VII;
+; ws-icon-7 = VIII;
+; ws-icon-8 = IX;
+; ws-icon-9 = X;
+
+ws-icon-default = 
+
+enable-click = true
+enable-scroll = false
+format = <label-state> <label-mode>
+format-background = ${color.bground}
+format-foreground = ${color.shade1}
+label-monitor = %name%
+label-focused = %icon%
+label-occupied = %icon%
+label-empty = %icon%
+label-urgent = %icon%
+
+label-focused-foreground = ${color.modulefg-alt}
+label-occupied-foreground = ${color.dunno}
+label-urgent-foreground = ${color.red}
+label-empty-foreground = ${color.accent}
+label-focused-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1
+label-monocle = 
+; vim:ft=dosini

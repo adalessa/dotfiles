@@ -1,0 +1,48 @@
+#! /bin/sh
+
+sxhkd &
+dunst &
+unclutter &
+compton --shadow-exclude '!focused' &
+setbg &
+mpd &
+conky &
+conky -c ~/.config/conky/wheather.conf &
+conky -c ~/.config/conky/wifi.conf &
+
+$HOME/.config/polybar/launch.sh
+$HOME/.screenlayout/default.sh
+
+bspc monitor DisplayPort-0 -d I II III IV V
+bspc monitor DisplayPort-1 -d VI VII VIII IX X
+
+bspc config border_width         0
+bspc config window_gap           5
+bspc config top_padding         27
+bspc config right_padding        0
+bspc config left_padding         0
+bspc config border_radious      0.5
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   false
+bspc config gapless_monocle      true
+bspc config paddingless_monocle  true
+bspc config pointer_motion_interval 7
+bspc config automatic_scheme longest_side
+
+bspc config pointer_modifier     mod4
+bspc config click_to_focus       true
+bspc config focus_follows_pointer true
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+
+bspc rule -a Screenkey manage=off
+bspc rule -a steam_app_238960 desktop='^5' state=fullscreen locked=on
+bspc rule -a Sxiv state=floating follow=on
+bspc rule -a XenonTrade stat=floating desktop='^6'
+bspc rule -a Ripcord desktop='^3'
+bspc rule -a discord desktop='^3'
+bspc rule -a TelegramDesktop desktop='^3'
+bspc rule -a ide desktop='^4' state=tiled
+bspc rule -a gamehub desktop='^5'

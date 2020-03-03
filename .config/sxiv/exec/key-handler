@@ -1,0 +1,11 @@
+#!/bin/sh
+while read file
+do
+
+    fullpath="$(pwd)/$file"
+    case "$1" in
+        "w")
+            cp "$file" ~/.config/wall.png &&
+            setbg ;;
+    esac
+done
