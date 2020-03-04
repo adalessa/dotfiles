@@ -1,11 +1,10 @@
 [color]
 white = #FFFFFF
 red = #e53935
-light_green = #28bd6b
 dunno = #5c889c
 shade1 = #0f111a
-bground = #AA16212C
-fground = #b7d3ee
+bground = #AA2E3440
+fground = #D8DEE9
 accent = #31323a
 modulefg = #f7f7f7
 modulefg-alt = #f7f7f7
@@ -24,7 +23,8 @@ wm-restack = bspwm
 fixed-center = true
 ;; the actual font
 font-0 = "Hack:size=6:antialias=true;2"
-font-1 = "Hack Nerd Font Mono:pixelsize=10:antialias=true:autohint=true;3"
+font-1 = "FontAwesome:pixelsize=6:antialias=true:autohint=true;3"
+font-2 = "Hack Nerd Font Mono:pixelsize=10:antialias=true:autohint=true;3"
 
 override-redirect = true
 offset-x = 0
@@ -62,24 +62,22 @@ modules-right = mpd temperature wifi volume date
 tray-position = right
 tray-padding = 2
 
-[module/Playing]
-type = custom/script
-exec = ~/.config/bin/playing.sh
-format-prefix = " "
-interval = 0.1
-label-font = 0
-click-left = sp play
-format-padding = 1
-
 [module/mpd]
 type = internal/mpd
-format-online = <label-song> <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online = <icon-prev> <icon-stop> <label-song> <toggle> <icon-next>
 
-icon-prev =
-icon-stop =
-icon-play =
-icon-pause =
-icon-next =
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-seekb = 
+icon-seekf = 
+icon-random = 
+icon-repeat = 
+icon-repeatone = 凌
+icon-single = 🔂
+icon-consume = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
