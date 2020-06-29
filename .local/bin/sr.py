@@ -8,12 +8,13 @@ from pytvdbapi import api
 def main(argv):
     inputfile = ''
 
-    opts, args = getopt.getopt(argv, "hi:p:s:e:l:a:", ["ifile=", "program=", "season=", "episode=", "leadingepisode=", "absolute="])
+    opts, args = getopt.getopt(argv, "hi:p:s:e:l:a:o:", ["ifile=", "program=", "season=", "episode=", "leadingepisode=", "absolute=", "lang=",])
 
     showsearch = ''
     seasonnumber = ''
     episodenumber = ''
     absolute = ''
+    lang = 'en'
 
     le = 2
 
@@ -33,6 +34,8 @@ def main(argv):
             le = int(arg)
         elif opt in ("-a", "--absolute"):
             absolute = int(arg)
+        elif opt in ("-o", "--lang"):
+            lang = arg
 
     if not os.path.isfile(inputfile):
         sys.exit("The input is not a file")
@@ -42,14 +45,14 @@ def main(argv):
     if not showsearch:
         showsearch = input("show: ")
 
-    shows = db.search(showsearch, "en")
+    shows = db.search(showsearch, lang)
 
     show = shows[0]
 
     print(show.SeriesName)
 
     if absolute:
-        episode = db.get_episode("en", "absolute", absolutenumber=absolute, seriesid=show.seriesid)
+        episode = db.get_episode(lang, "absolute", absolutenumber=absolute, seriesid=show.seriesid)
         season = show[episode.SeasonNumber]
     else:
         if not seasonnumber:
@@ -74,6 +77,7 @@ def main(argv):
     print(newfilename)
 
     directory = "/mnt/megastorage/Media/Series/{0}".format(show.SeriesName)
+    print(directory)
     if not os.path.exists(directory):
         os.makedirs(directory)
     newfile = os.path.join(directory, newfilename)

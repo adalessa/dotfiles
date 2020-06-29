@@ -1,3 +1,10 @@
 #!/usr/bin/sh
-bspc query -N -n .floating > /tmp/scratchid
-$SHELL
+
+id=$(xdotool search --class scratchterm)
+
+if [ -z "$id" ]
+then
+    $TERMINAL -c scratchterm -g 150x50 -T scratch  -e tmux new -s Scratch
+else
+    bspc node "$id" --flag hidden -f
+fi

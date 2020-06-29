@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+cd $HOME/repos/inky/ && ./RUN.command &

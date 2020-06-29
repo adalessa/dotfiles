@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+# if the socket does not exists should create a new session in st with 
+
+if [ ! -S /tmp/nvimsocket ]; then
+    NVIM_LISTEN_ADDRESS=/tmp/nvimsocket $TERMINAL -e nvim &
+fi
+
+nvr --remote $@

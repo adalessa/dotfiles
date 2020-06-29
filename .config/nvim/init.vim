@@ -1,5 +1,12 @@
+" MY VIM CONFIGURATION
 " Pluggins
-call plug#begin('~/.vim/plugged')
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
+endif
+call plug#begin('~/.config/nvim/plugged')
 " tpope shit, because is good
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -8,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-speeddating'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 
@@ -18,6 +26,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'Raimondi/delimitMate'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'benmills/vimux'
 
 Plug 'pbrisbin/vim-mkdir'
 
@@ -32,11 +41,13 @@ Plug 'terryma/vim-multiple-cursors'
 "PHP related
 Plug 'StanAngeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
-Plug 'arnaud-lb/vim-php-namespace'
 Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'phpactor/phpactor', {'do': 'composer install', 'for': 'php'}
+Plug 'vim-vdebug/vdebug'
 
 Plug 'mileszs/ack.vim'
 
+"This highlights and show previo of replaces
 Plug 'markonm/traces.vim'
 
 " Laravel
@@ -54,6 +65,7 @@ Plug 'SirVer/ultisnips'
 " File handlers
 Plug 'posva/vim-vue'
 Plug 'jwalton512/vim-blade'
+Plug 'kovetskiy/sxhkd-vim'
 
 " Status Bar
 Plug 'vim-airline/vim-airline'
@@ -70,9 +82,12 @@ Plug 'vimwiki/vimwiki'
 Plug 'freitass/todo.txt-vim'
 
 Plug 'mxw/vim-jsx'
+Plug 'cespare/vim-toml'
+Plug 'calviken/vim-gdscript3'
 
 " Themes
 Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -81,20 +96,26 @@ syntax enable
 
 let mapleader = ','
 
-set undodir=~/.vim/undodir
+set undodir=~/.config/nvim/undodir
 set undofile
 
 " Editor
 set number
 set relativenumber
+let g:gruvbox_italic=1
+colorscheme gruvbox
 
-colorscheme nord
+hi phpKeyword cterm=italic ctermfg=167
+hi htmlArg cterm=italic ctermfg=108
+hi bladeKeyword cterm=italic ctermfg=167
+
+let &colorcolumn="80,".join(range(120,999),",")
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Search
 set ignorecase
@@ -144,12 +165,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height = 2
-let g:syntastic_php_phpcs_args = '--standard=PSR2'
+let g:syntastic_php_phpcs_args = '--standard=PSR12'
 let g:syntastic_php_checkers = ["php", "phpcs"]
-let g:syntastic_ignore_files = ['\m\cTest.php$']
+let g:syntastic_ignore_files = ['\m\cTest.php$', 'Pest.php']
 
 "pdv
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+let g:pdv_template_dir = $HOME ."/.config/nvim/bundle/pdv/templates_snip"
 nnoremap <leader>d :call pdv#DocumentWithSnip()<CR>
 nnoremap <leader>ds :call pdv#DocumentCurrentLine()()<CR>
 
@@ -167,7 +188,9 @@ endfunction
 function! CreateTagFile()
     let cwd = getcwd()
     let tagfilename = cwd . "/tags"
-    let cmd = 'ctags -R --exclude=node_modules --PHP-kinds=cfit'
+    let cmd = 'rm '. tagfilename
+    let resp = system(cmd)
+    let cmd = 'ctags -R --exclude=node_modules --PHP-kinds=+cdfint-av --fileds=+aimls --tag-relative=yes --exlude=*Test.php --exclude=*phpunit* '
     let resp = system(cmd)
 endfunction
 
@@ -175,33 +198,26 @@ function! UpdateTags()
     let f = expand("%:p")
     let cwd = getcwd()
     let tagfilename = cwd . "/tags"
-    let cmd = 'ctags -a -f ' . tagfilename . ' --language=php --fields=+aimS --php-kinds=cdfint --tag-relative=yes --totals=yes ' . '"' . f . '"'
+    let cmd = 'ctags -a -f ' . tagfilename . ' --language=php --fields=+aimlS --php-kinds=+cdfint-av --tag-relative=yes --totals=yes ' . '"' . f . '"'
     call DelTagOfFile(f)
     let resp = system(cmd)
 endfunction
 autocmd BufWritePost *.php call UpdateTags()
 
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
+autocmd FileType php inoremap <Leader>c <Esc>:PhpactorContextMenu<CR>
+autocmd FileType php noremap <Leader>c :PhpactorContextMenu<CR>
 
 "map the add use
-autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
-
-function! IPhpExpandClass()
-    call PhpExpandClass()
-    call feedkeys('a', 'n')
-endfunction
+autocmd FileType php inoremap <Leader>n <Esc>:PhpactorImportClass<CR>
+autocmd FileType php noremap <Leader>n :PhpactorImportClass<CR>
 
 "map the expand class
-autocmd FileType php inoremap <Leader>nf <Esc>:call IPhpExpandClass()<CR>
-autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
+autocmd FileType php inoremap <Leader>nf <Esc>:PhpactorClassExpand<CR>
+autocmd FileType php noremap <Leader>nf :PhpactorClassExpand<CR>
 
 ""order by A-Z
-autocmd FileType php inoremap <Leader>sus <Esc>:call PhpSortUse()<CR>
-autocmd FileType php noremap <Leader>sus :call PhpSortUse()<CR>
+autocmd FileType php inoremap <Leader>sus <Esc>:PhpactorImportMissingClasses<CR>
+autocmd FileType php noremap <Leader>sus :PhpactorImportMissingClasses<CR>
 
 "order the import by the lenght
 vmap <leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
@@ -212,8 +228,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " airline
-let g:airline_powerline_fonts=1
-let g:airline_theme='nord'
+let g:airline_powerline_fonts=0
+let g:airline_theme='gruvbox'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 " set laststatus=1
@@ -359,11 +375,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Editor Config
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
-function! DockerTransform(cmd) abort
-    return './dev exec app '.a:cmd
-endfunction
-
-let g:test#custom_transformations = {'docker': function('DockerTransform')}
 
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
@@ -371,12 +382,13 @@ nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
+nmap <leader>q :call VimuxCloseRunner()<CR>
+
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 
 " Macros
-
 " Macro to initialize variables
 let @a="yiw/}O$this->pA = $pA;?constructOprotected $pA;/\"e, "
 
@@ -425,3 +437,38 @@ hi IndentGuidesEven ctermbg=darkgrey
 " forward and backward search of current word
 nnoremap * /\<<C-R>=expand('<cword>')<CR>\><CR>
 nnoremap # ?\<<C-R>=expand('<cword>')<CR>\><CR>
+
+nnoremap <leader>now :r !date +"\%Y-\%m-\%dT\%H:\%M:\%:z" <CR>
+
+autocmd BufWritePre *s/\s\+%//e
+
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
+nnoremap <leader>a :Rg<space>
+nnoremap <leader>A :exec "Rg ".expand("<cword>")<CR>
+
+autocmd VimEnter * command! -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+
+let g:vdebug_options = {'break_on_open': 0}
+
+" start debuygger with the key
+function! StartPhpDebuging()
+    exe "VimuxRunCommand('export XDEBUG_CONFIG=\"idekey=xdebug\"')"
+    exe 'VdebugStart'
+    let test#strategy="vimux"
+endfunction
+function! StopPhpDebuging()
+    exe "VimuxCloseRunner"
+    exe "python3 debugger.close()"
+    exe "python3 debugger.close()"
+    let test#strategy="neovim"
+endfunction
+
+noremap <Leader>t :call StartPhpDebuging()<CR>
+noremap <Leader>T :call StopPhpDebuging()<CR>

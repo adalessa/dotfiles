@@ -1,1 +1,0 @@
-/home/adalessa/code/mmdeath/mmdeaths.py

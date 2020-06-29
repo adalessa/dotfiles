@@ -8,6 +8,6 @@ dir=$HOME/code/$project
 
 cd $dir
 
-cmd="tmux new -s $project nvim . -S"
+cmd="tmux new -s ${project::7} nvim . -S"
 
 $TERMINAL -c ide -e $cmd
