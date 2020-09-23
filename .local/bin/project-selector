@@ -1,6 +1,6 @@
 #!/bin/sh
 
-project=$(ls ~/code | dmenu -l 20 )
+project=$(ls ~/code | rofi -dmenu -window-title Project )
 
 dir=$HOME/code/$project
 
@@ -10,4 +10,4 @@ cd $dir
 
 cmd="tmux new -s ${project::7} nvim . -S"
 
-$TERMINAL -c ide -e $cmd
+$TERMINAL -e $cmd

@@ -6,6 +6,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
+
 call plug#begin('~/.config/nvim/plugged')
 " tpope shit, because is good
 Plug 'tpope/vim-surround'
@@ -15,25 +16,27 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-speeddating'
+" Plug 'tpope/vim-speeddating'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'janko/vim-test'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'Raimondi/delimitMate'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'benmills/vimux'
+Plug 'dyng/ctrlsf.vim'
 
 Plug 'pbrisbin/vim-mkdir'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Snippets
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+" Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+" Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
 Plug 'terryma/vim-multiple-cursors'
@@ -42,7 +45,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'StanAngeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'adoy/vim-php-refactoring-toolbox'
-Plug 'phpactor/phpactor', {'do': 'composer install', 'for': 'php'}
+Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'vim-vdebug/vdebug'
 
 Plug 'mileszs/ack.vim'
@@ -65,7 +68,7 @@ Plug 'SirVer/ultisnips'
 " File handlers
 Plug 'posva/vim-vue'
 Plug 'jwalton512/vim-blade'
-Plug 'kovetskiy/sxhkd-vim'
+Plug 'lumiliet/vim-twig'
 
 " Status Bar
 Plug 'vim-airline/vim-airline'
@@ -81,18 +84,20 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'freitass/todo.txt-vim'
 
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'cespare/vim-toml'
-Plug 'calviken/vim-gdscript3'
+Plug 'jelera/vim-javascript-syntax'
 
 " Themes
-Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
+Plug 'cocopon/iceberg.vim'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
-
 syntax enable
+set termguicolors
 
 let mapleader = ','
 
@@ -102,12 +107,18 @@ set undofile
 " Editor
 set number
 set relativenumber
-let g:gruvbox_italic=1
-colorscheme gruvbox
+" let g:gruvbox_italic=1
+" let g:airline_theme='gruvbox'
+" colorscheme gruvbox
+" colorscheme one
+" set background=dark
+" let g:one_allow_italics = 1
+colorscheme iceberg
+let g:airline_theme='iceberg'
 
-hi phpKeyword cterm=italic ctermfg=167
-hi htmlArg cterm=italic ctermfg=108
-hi bladeKeyword cterm=italic ctermfg=167
+" hi phpKeyword cterm=italic ctermfg=167 gui=italic guifg=#fb4934
+" hi htmlArg cterm=italic ctermfg=108 gui=italic guifg=#8ec07c
+" hi bladeKeyword cterm=italic ctermfg=167 gui=italic guifg=#fb4934
 
 let &colorcolumn="80,".join(range(120,999),",")
 
@@ -151,9 +162,9 @@ let g:php_cs_fixer_config_file = '.php_cs'
 nnoremap <silent><leader>pf :call PhpCsFixerFixFile()<cr>
 
 "NERDTree
-let NERDTreeHijackNetrw = 0
-nmap <leader>1 :NERDTreeToggle<cr>
-let NERDTreeWinPos = "right"
+" let NERDTreeHijackNetrw = 0
+" nmap <leader>1 :NERDTreeToggle<cr>
+" let NERDTreeWinPos = "right"
 
 "Syntastic
 set statusline+=%#warningmsg#
@@ -167,7 +178,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height = 2
 let g:syntastic_php_phpcs_args = '--standard=PSR12'
 let g:syntastic_php_checkers = ["php", "phpcs"]
-let g:syntastic_ignore_files = ['\m\cTest.php$', 'Pest.php']
+let g:syntastic_ignore_files = ['\m\cTest.php$', 'Pest.php', 'vendor/', 'database/', 'nova/']
 
 "pdv
 let g:pdv_template_dir = $HOME ."/.config/nvim/bundle/pdv/templates_snip"
@@ -229,7 +240,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " airline
 let g:airline_powerline_fonts=0
-let g:airline_theme='gruvbox'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 " set laststatus=1
@@ -472,3 +482,7 @@ endfunction
 
 noremap <Leader>t :call StartPhpDebuging()<CR>
 noremap <Leader>T :call StopPhpDebuging()<CR>
+
+let g:Hexokinase_highlighters = [ 'virtual' ]
+
+noremap <Leader>1 :CocCommand explorer<cr>

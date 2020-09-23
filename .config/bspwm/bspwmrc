@@ -1,29 +1,32 @@
 #! /bin/sh
 
-sxhkd &
-dunst &
-unclutter &
-compton --shadow-exclude '!focused' &
-setbg &
-mpd &
-conky &
-conky -c ~/.config/conky/wheather.conf &
-conky -c ~/.config/conky/wifi.conf &
+# sxhkd &
+# dunst &
+# unclutter &
+# compton --shadow-exclude '!focused' &
+# setbg &
+# mpd &
+# conky &
+# conky -c ~/.config/conky/wheather.conf &
+# conky -c ~/.config/conky/wifi.conf &
+
+# Sound mute headset mic
+
+amixer -c 2 sset Mic mute
 
 $HOME/.config/polybar/launch.sh
-$HOME/.screenlayout/default.sh
+$HOME/.screenlayout/single4k.sh
 
-bspc monitor DisplayPort-0 -d I II III IV V
-bspc monitor DisplayPort-1 -d VI VII VIII IX X
+bspc monitor DisplayPort-1 -d I II III IV V VI VII VIII IX X
 
-bspc config border_width         0
+bspc config border_width         2
 bspc config window_gap           5
 bspc config top_padding         27
 bspc config right_padding        0
 bspc config left_padding         0
-bspc config border_radious      0.5
+bspc config border_radious       2
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.58
 bspc config borderless_monocle   false
 bspc config gapless_monocle      true
 bspc config paddingless_monocle  true
@@ -38,7 +41,8 @@ bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
 bspc rule -a Screenkey manage=off
-bspc rule -a steam_app_238960 desktop='^5' state=fullscreen locked=on
+bspc rule -a Steam desktop='^5'
+
 bspc rule -a Sxiv state=floating follow=on
 bspc rule -a XenonTrade stat=floating desktop='^6'
 bspc rule -a Ripcord desktop='^3'
@@ -46,3 +50,16 @@ bspc rule -a discord desktop='^3'
 bspc rule -a TelegramDesktop desktop='^3'
 bspc rule -a ide desktop='^4' state=tiled
 bspc rule -a gamehub desktop='^5'
+
+# Scratch Pad
+scratch &
+bspc rule -a scratchterm sticky=on state=floating hidden=on locked=on
+
+# Steam Games
+
+steamlib=/mnt/megastorage/SteamLibrary    # path to your steamlibrary
+mygames=$(ls $steamlib/steamapps/appmanifest_*.acf | sed 's/[^0-9]*//g')    # this sed command removes everything but the digits
+
+for game in $mygames; do
+    bspc rule -a steam_app_$game desktop=^5 state=fullscreen
+done

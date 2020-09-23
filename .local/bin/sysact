@@ -14,7 +14,7 @@ cmds="\
 ♻ renew dwm	kill -HUP $(pidof -s dwm)
 🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
 🔃 reboot	${reb:-reboot}
-🖥 shutdown	${shut:shutdown -h now}"
+🖥 shutdown	${shut:-shutdown -h now}"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
