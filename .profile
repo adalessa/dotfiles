@@ -33,5 +33,7 @@ fi
 export TERMINAL="kitty"
 export BROWSER="firefox"
 export EDITOR="nvim"
-export QT_QPA_PLATFORMTHEME="qt5ct"
 export BAT_THEME="OneHalfDark"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
