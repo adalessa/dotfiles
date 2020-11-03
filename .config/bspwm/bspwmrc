@@ -1,38 +1,32 @@
 #! /bin/sh
 
-# sxhkd &
-# dunst &
-# unclutter &
-# compton --shadow-exclude '!focused' &
-# setbg &
-# mpd &
-# conky &
-# conky -c ~/.config/conky/wheather.conf &
-# conky -c ~/.config/conky/wifi.conf &
-
-# Sound mute headset mic
-
-amixer -c 2 sset Mic mute
+sxhkd &
+remaps &
+setbg &
+picom &
+dunst &
+xset r rate 300 50 &
+unclutter &
 
 $HOME/.config/polybar/launch.sh
-$HOME/.screenlayout/single4k.sh
+# $HOME/.screenlayout/single4k.sh
 
-bspc monitor DisplayPort-1 -d I II III IV V VI VII VIII IX X
+bspc monitor eDP-1 -d 1 2 3 4 5
+bspc monitor HDMI-1 -d 6 7 8 9 0
 
 bspc config border_width         2
-bspc config window_gap           5
-bspc config top_padding         27
+bspc config window_gap           2
+bspc config top_padding         23
 bspc config right_padding        0
 bspc config left_padding         0
-bspc config border_radious       2
+bspc config border_radious       1
 
-bspc config split_ratio          0.58
+bspc config split_ratio          0.5
 bspc config borderless_monocle   false
 bspc config gapless_monocle      true
 bspc config paddingless_monocle  true
 bspc config pointer_motion_interval 7
-bspc config automatic_scheme longest_side
-
+bspc config automatic_scheme eDP-1
 bspc config pointer_modifier     mod4
 bspc config click_to_focus       true
 bspc config focus_follows_pointer true
@@ -52,14 +46,5 @@ bspc rule -a ide desktop='^4' state=tiled
 bspc rule -a gamehub desktop='^5'
 
 # Scratch Pad
-scratch &
+# scratch &
 bspc rule -a scratchterm sticky=on state=floating hidden=on locked=on
-
-# Steam Games
-
-steamlib=/mnt/megastorage/SteamLibrary    # path to your steamlibrary
-mygames=$(ls $steamlib/steamapps/appmanifest_*.acf | sed 's/[^0-9]*//g')    # this sed command removes everything but the digits
-
-for game in $mygames; do
-    bspc rule -a steam_app_$game desktop=^5 state=fullscreen
-done

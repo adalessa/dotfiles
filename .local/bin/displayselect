@@ -1,3 +1,4 @@
 #!/bin/env bash
 
-$(ls ~/.screenlayout | dmenu)
+script=$(ls ~/.screenlayout | dmenu)
+sh ~/.screenlayout/$script
