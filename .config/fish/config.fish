@@ -171,6 +171,10 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# Git
+alias gst="git status"
+alias gcmsg="git commit -m"
+
 #ls alias
 alias l='ls -lah'
 alias ls='ls --color=tty'

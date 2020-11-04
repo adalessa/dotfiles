@@ -23,13 +23,11 @@ Config { font = "xft:Ubuntu Mono:pixelsize=15:antialias=true:hinting=true"
                     , Run Wireless "wlp5s0" [] 10
                     , Run Network "enp3s0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run UnsafeStdinReader
                     -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
                     , Run Com "/home/arieldalessandro/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+                    , Run Com "pamixer" ["--get-volume"] "vol" 10
                     , Run Com "vpnstatus" [] "vpnstatus" 20
                     , Run BatteryP ["BAT0"]
                           ["-t", "<acstatus><watts> W (<left>%)",
@@ -39,8 +37,8 @@ Config { font = "xft:Ubuntu Mono:pixelsize=15:antialias=true:hinting=true"
                            "-l", "red", "-m", "blue", "-h", "green"]
                           600
                     ]
-       , sepChar = "%"
+       , sepChar = "$"
        , alignSep = "}{"
-       , template = "%UnsafeStdinReader%  }\
-                    \{ %battery% %vpnstatus% <fc=#ee9a00>%date%</fc>%trayerpad%"
+       , template = "$UnsafeStdinReader$  }\
+                    \{ $vpnstatus$ | $battery$ | $vol$% | <fc=#ee9a00>$date$</fc> | $trayerpad$"
        }
