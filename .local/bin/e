@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    name="$1"
+else
+    name=$(basename $(pwd))
+fi
+
+tmux rename-window "$name"
+if [ -f "Session.vim" ]; then
+    nvim . -S Session.vim
+else
+    nvim . +Obsession
+fi
