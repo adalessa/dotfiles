@@ -1,0 +1,68 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/arieldalessandro/
+	..
+1604497166
+'b
+	/home/arieldalessandro/bin/
+	..
+1604497166
+'h
+	/home/arieldalessandro/
+	..
+1604497166
+'z
+	/home/arieldalessandro/.config/vifm
+	..
+1604497166
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/arieldalessandro
+	pic-selected-201102-1305-56.png
+22
+d
+
+# Right window history (oldest to newest):
+D/home/arieldalessandro
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0
