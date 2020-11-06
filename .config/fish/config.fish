@@ -179,6 +179,8 @@ alias gcmsg="git commit -m"
 alias l='ls -lah'
 alias ls='ls --color=tty'
 
+alias mymake='make -f myMakefile'
+
 # confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
