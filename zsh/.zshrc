@@ -73,6 +73,7 @@ ZSH_THEME="af-magic"
 plugins=(
     git
     vi-mode
+    docker
     fzf
     zsh-syntax-highlighting
     laravel
