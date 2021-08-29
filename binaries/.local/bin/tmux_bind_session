@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+key=$1
+
+file="/tmp/tmux-session-$1"
+
+if [[ -n "$TMUX" ]]; then
+    session_name=$(tmux ls | grep attached | cut -d: -f1)
+    echo $session_name > $file
+fi

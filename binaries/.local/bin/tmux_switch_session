@@ -1,0 +1,14 @@
+#!/bin/env bash
+
+key=$1
+
+file="/tmp/tmux-session-$1"
+
+if [ -f "$file" ]; then
+    # Read the file for the session name
+    name=$(head -n 1 "$file")
+    session=$(tmux ls | grep $name: | wc -l)
+    if [ $session -gt 0 ]; then
+        tmux switch -t "$name"
+    fi
+fi
