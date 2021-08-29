@@ -1,24 +1,30 @@
 #!/bin/env sh
 projects=()
+pro=()
 
 project_dirs=(
-    "/home/$USER/code/php/"
-    "/home/$USER/code/js/"
-    "/home/$USER/code/go/src/github.com/adalessa/"
-    "/home/$USER/code/go/src/github.com/wkda/"
+    "/home/$USER/code/*/"
+    "/home/$USER/code/go/src/*/*/"
 )
 
 for directory in "${project_dirs[@]}"
 do
-    if [[ -d $directory ]]; then
-        for p in "${directory}*"
-        do
-            projects+=($p)
-        done
+    for p in "${directory}*"
+    do
+        projects+=($p)
+    done
+done
+
+for p in "${projects[@]}"
+do
+    if [ "$p" = /home/$USER/code/go/src ]; then
+        echo
+    else
+        pro+=($p)
     fi
 done
 
-selected=$(printf "%s\n" "${projects[@]}" | fzf)
+selected=$(printf "%s\n" "${pro[@]}" | fzf)
 
 [ -z $selected ] && exit
 
@@ -33,6 +39,5 @@ if [ ! -f "$selected/.project.sh" ]; then
 else
     "$selected"/.project.sh
 fi
-
 
 exit 0
