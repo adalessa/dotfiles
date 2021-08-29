@@ -40,4 +40,6 @@ else
     "$selected"/.project.sh
 fi
 
+echo $project > /tmp/tmux-last-project
+
 exit 0
