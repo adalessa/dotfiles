@@ -3,13 +3,13 @@ projects=()
 pro=()
 
 project_dirs=(
-    "/home/$USER/code/*/"
+    "/home/$USER/code/*/*/"
     "/home/$USER/code/go/src/*/*/"
 )
 
 for directory in "${project_dirs[@]}"
 do
-    for p in "${directory}*"
+    for p in "${directory}"
     do
         projects+=($p)
     done

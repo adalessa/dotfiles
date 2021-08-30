@@ -101,6 +101,12 @@ workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
+bindsym $mod+period move container to output right
+bindsym $mod+comma move container to output left
+
+bindsym $mod+Shift+period move workspace to output right
+bindsym $mod+Shift+comma move workspace to output left
+
 # split orientation
 bindsym $mod+semicolon split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
