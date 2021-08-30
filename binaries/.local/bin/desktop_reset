@@ -1,0 +1,4 @@
+#!/bin/env sh
+
+killall -SIGUSR1 conky
+nitrogen --restore
