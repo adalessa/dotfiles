@@ -4,7 +4,7 @@ pro=()
 
 project_dirs=(
     "/home/$USER/code/*/*/"
-    "/home/$USER/code/go/src/*/*/"
+    "/home/$USER/code/go/src/*/*/*/"
 )
 
 for directory in "${project_dirs[@]}"
@@ -17,7 +17,7 @@ done
 
 for p in "${projects[@]}"
 do
-    if [ "$p" = /home/$USER/code/go/src ]; then
+    if [ "$p" == /home/$USER/code/go/src ]; then
         echo
     else
         pro+=($p)
