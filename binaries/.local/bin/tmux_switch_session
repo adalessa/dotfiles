@@ -17,7 +17,7 @@ fi
 
 # no session can call the select project and save it
 rm $projectFile
-tmux popup -E project-selector
+tmux popup -E tmux_projects
 
 if [ -f "$projectFile" ]; then
     project=$(head -n 1 "$projectFile")
