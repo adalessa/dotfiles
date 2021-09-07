@@ -121,3 +121,5 @@ function okta-b2x() {
     # ~/venvs/okta-awscli/bin/okta-awscli --okta-profile b2x-prod-dev-ro --profile b2x-prod
     # aws --region eu-west-1 --profile b2x-prod ecr get-login-password | docker login --username AWS --password-stdin 357421101311.dkr.ecr.eu-west-1.amazonaws.com
 }
+
+[[ -z $TMUX ]] && tmux a
