@@ -31,7 +31,7 @@ switchOrCreate() {
     sessions=$(tmux ls | grep $project: | wc -l)
 
     if [ $sessions -eq 0 ]; then
-        tmux new-session -d -s "$project" "cd "$projectDir" && nvim"
+        tmux new-session -d -s "$project" "cd "$projectDir" && nvim ."
     fi
 
     tmux switch -t "${project}"
