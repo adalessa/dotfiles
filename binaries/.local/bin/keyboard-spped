@@ -1,0 +1,3 @@
+#! /usr/bin/env sh
+
+xset r rate 220 40
