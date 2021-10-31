@@ -123,3 +123,5 @@ function okta-b2x() {
 }
 
 [[ -z $TMUX ]] && tmux new-session -A -s Main
+
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
