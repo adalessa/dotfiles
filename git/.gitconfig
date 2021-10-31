@@ -1,0 +1,11 @@
+[user]
+	email = dalessandro.ariel@gmail.com
+	name = Ariel D'Alessandro
+[init]
+	defaultBranch = main
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
+[alias]
+    work = !sh -c 'git fetch && git checkout @{upstream} -tb \"$@\"' _
