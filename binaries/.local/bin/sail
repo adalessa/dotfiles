@@ -1,0 +1,2 @@
+#!/bin/env bash
+[ -f sail ] && bash sail || bash vendor/bin/sail $@
