@@ -122,6 +122,4 @@ function okta-b2x() {
     # aws --region eu-west-1 --profile b2x-prod ecr get-login-password | docker login --username AWS --password-stdin 357421101311.dkr.ecr.eu-west-1.amazonaws.com
 }
 
-[[ -z $TMUX ]] && tmux new-session -A -s Main
-
 alias ta='tmux attach'
