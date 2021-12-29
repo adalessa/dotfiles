@@ -1,0 +1,4 @@
+#!/bin/env bash
+
+xrandr --output Virtual1 --mode 2560x1440
+nitrogen --restore
