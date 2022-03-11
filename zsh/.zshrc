@@ -123,3 +123,4 @@ function okta-b2x() {
 }
 
 alias ta='tmux attach'
+alias mine='sudo chown -R $USER:$USER .'
