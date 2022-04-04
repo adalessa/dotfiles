@@ -124,3 +124,4 @@ function okta-b2x() {
 
 alias ta='tmux attach'
 alias mine='sudo chown -R $USER:$USER .'
+alias "docker-compose -T"="docker-compose"
