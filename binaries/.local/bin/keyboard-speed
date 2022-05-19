@@ -1,3 +1,11 @@
 #! /usr/bin/env sh
 
-xset r rate 220 40
+# This script is called on startup to remap keys.
+# Decrease key repeat delay to 300ms and increase key repeat rate to 50 per second.
+xset r rate 300 50
+# Map the caps lock key to super, and map the menu key to right super.
+setxkbmap -option caps:super,altwin:menu_win
+# When caps lock is pressed only once, treat it as escape.
+killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
+# Turn off caps lock if on since there is no longer a key for it.
+xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock

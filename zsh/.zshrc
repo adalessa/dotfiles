@@ -106,21 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-alias okta-awscli='~/venvs/okta-awscli/bin/okta-awscli'
 
-function okta() {
-    ~/venvs/okta-awscli/bin/okta-awscli --okta-profile legacy-federation/Devops --profile default
-    aws ecr get-login-password | docker login --username AWS --password-stdin 049736579808.dkr.ecr.eu-west-1.amazonaws.com
-    aws ecr get-login-password | docker login --username AWS --password-stdin 167967495118.dkr.ecr.eu-west-1.amazonaws.com
-}
-
-function okta-b2x() {
-    ~/venvs/okta-awscli/bin/okta-awscli --okta-profile b2x-qa-dev-rw --profile b2x-qa
-    aws --region eu-west-1 --profile b2x-qa ecr get-login-password | docker login --username AWS --password-stdin 304027481789.dkr.ecr.eu-west-1.amazonaws.com
-    # ~/venvs/okta-awscli/bin/okta-awscli --okta-profile b2x-prod-dev-ro --profile b2x-prod
-    # aws --region eu-west-1 --profile b2x-prod ecr get-login-password | docker login --username AWS --password-stdin 357421101311.dkr.ecr.eu-west-1.amazonaws.com
-}
+# source extra files
+for f in ~/.local/zsh/*; do source $f; done
 
 alias ta='tmux attach'
 alias mine='sudo chown -R $USER:$USER .'
