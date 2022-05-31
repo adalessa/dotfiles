@@ -11,20 +11,20 @@ local themes_path = gfs.get_configuration_dir() .. "themes/"
 
 local theme = {}
 
-theme.font          = "sans 10"
+theme.font          = "JetBrainsMono Nerd Font 10"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
+theme.bg_normal     = "#131a24"
+theme.bg_focus      = "#719cd6"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+theme.fg_normal     = "#719cd6"
+theme.fg_focus      = "#393b44"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"

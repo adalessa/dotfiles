@@ -69,18 +69,18 @@ local modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.floating,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -114,7 +114,7 @@ local mymainmenu = awful.menu({
     },
 })
 
-local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+-- local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -226,14 +226,15 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup({
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            s.mylayoutbox,
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -243,7 +244,6 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
-            s.mylayoutbox,
         },
     })
 end)
@@ -261,10 +261,10 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
-    awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-    awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
-    awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
-    awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
+    awful.key({ modkey }, "s",      hotkeys_popup.show_help,    { description = "show help",        group = "awesome"   }),
+    awful.key({ modkey }, "Left",   awful.tag.viewprev,         { description = "view previous",    group = "tag"       }),
+    awful.key({ modkey }, "Right",  awful.tag.viewnext,         { description = "view next",        group = "tag"       }),
+    awful.key({ modkey }, "Escape", awful.tag.history.restore,  { description = "go back",          group = "tag"       }),
 
     awful.key({ modkey }, "j", function()
         awful.client.focus.byidx(1)
@@ -361,7 +361,7 @@ local clientkeys = gears.table.join(
         c.fullscreen = not c.fullscreen
         c:raise()
     end, { description = "toggle fullscreen", group = "client" }),
-    awful.key({ modkey, "Shift" }, "c", function(c)
+    awful.key({ modkey }, "q", function(c)
         c:kill()
     end, { description = "close", group = "client" }),
     awful.key(
@@ -513,7 +513,10 @@ awful.rules.rules = {
     },
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
+    { rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
+
+    -- Not titlte bar apps
+    { rule_any = { class = { "kitty" } }, properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -585,4 +588,8 @@ end)
 client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
 end)
+
+awful.spawn.with_shell("picom -b")
+awful.spawn.with_shell("xset r rate 220 40")
+awful.spawn.with_shell("nm-applet")
 -- }}}
