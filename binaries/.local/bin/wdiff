@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+$(make vars)
+misses=$(docker-compose exec wiremock curl -s wiremock/__admin/requests/unmatched/near-misses)
+# echo $misses | jq
+echo $misses | jq '.nearMisses[0].request.body | fromjson' | jq --sort-keys . > /tmp/json-request
+echo $misses | jq '.nearMisses[0].stubMapping.request.bodyPatterns[0].equalToJson' | jq --sort-keys . > /tmp/json-stub
+url=$(echo $misses | jq '.nearMisses[0].request.url')
+method=$(echo $misses | jq '.nearMisses[0].request.method')
+echo "Method: ${method} URL: ${url}"
+colordiff -y /tmp/json-request /tmp/json-stub
