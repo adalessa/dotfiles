@@ -117,12 +117,17 @@ local power_menu = {
     { "Power Off", "poweroff" },
 }
 
+local tools_menu = {
+    { "Emoji", "rofi -show emoji -modi emoji"},
+}
+
 local mymainmenu = awful.menu({
     items = {
         { "awesome", myawesomemenu, beautiful.awesome_icon },
         { "VPN", vpnmenu },
         { "KB-speed", "keyboard-speed" },
         { "Term", terminal },
+        { "Tools", tools_menu },
         { "Power", power_menu },
     },
 })
