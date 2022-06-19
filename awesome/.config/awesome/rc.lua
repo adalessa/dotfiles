@@ -112,12 +112,18 @@ local vpnmenu = {
     { "Down", "nmcli con down Auto1 && notify-send Vpn 'Connection Down'" },
 }
 
+local power_menu = {
+    { "Reboot", "reboot" },
+    { "Power Off", "poweroff" },
+}
+
 local mymainmenu = awful.menu({
     items = {
         { "awesome", myawesomemenu, beautiful.awesome_icon },
         { "VPN", vpnmenu },
         { "KB-speed", "keyboard-speed" },
         { "Term", terminal },
+        { "Power", power_menu },
     },
 })
 
