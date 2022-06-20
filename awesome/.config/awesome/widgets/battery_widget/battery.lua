@@ -48,8 +48,13 @@ local battery_widget = awful.widget.watch(
             end
         end
 
+        local icon = "🔋"
+        if bat_now.percentage < 30 then
+            icon = "🪫"
+        end
+
         -- customize here
-        widget:set_text("Bat: " .. bat_now.percentage .. " " .. bat_now.state)
+        widget:set_text(icon .. bat_now.percentage)
     end
 )
 
