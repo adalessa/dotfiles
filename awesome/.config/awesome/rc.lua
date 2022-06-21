@@ -118,7 +118,12 @@ local power_menu = {
 }
 
 local tools_menu = {
-    { "Emoji", "rofi -show emoji -modi emoji"},
+    { "Emoji", "rofi -show emoji -modi emoji" },
+}
+
+local display_menu = {
+    { "2k", "xrandr --output Virtual1 --mode 2560x1440" },
+    { "UltraWide", "xrandr --output Virtual1 --mode 3440x1440" },
 }
 
 local mymainmenu = awful.menu({
@@ -128,6 +133,7 @@ local mymainmenu = awful.menu({
         { "KB-speed", "keyboard-speed" },
         { "Term", terminal },
         { "Tools", tools_menu },
+        { "Display", display_menu },
         { "Power", power_menu },
     },
 })
