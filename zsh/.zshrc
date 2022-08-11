@@ -117,3 +117,4 @@ alias "docker-compose -T"="docker-compose"
 alias l='exa --icons --all --long'
 alias ll='exa --icons --all'
 alias ls='exa --icons'
+alias sail='./vendor/bin/sail'
