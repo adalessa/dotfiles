@@ -118,7 +118,7 @@ local power_menu = {
 }
 
 local tools_menu = {
-    { "Emoji", "rofi -show emoji -modi emoji" },
+    { "Emoji", "rofi -modi emoji -show emoji -emoji-format '{emoji} <span weight=\"bold\">{name}</span>[ <span size=\"small\">({keywords})</span>]'" },
 }
 
 local display_menu = {
