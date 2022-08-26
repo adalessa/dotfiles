@@ -34,6 +34,19 @@ return {
 		saturation = 0.3,
 	},
 
+	-- socket
+	unix_domains = {
+		{
+			name = "unix",
+		},
+	},
+
+	-- This causes `wezterm` to act as though it was started as
+	-- `wezterm connect unix` by default, connecting to the unix
+	-- domain on startup.
+	-- If you prefer to connect manually, leave out this line.
+	default_gui_startup_args = { "connect", "unix" },
+
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		{ key = "=", mods = "SUPER", action = wezterm.action.IncreaseFontSize },
