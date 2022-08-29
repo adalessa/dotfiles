@@ -34,19 +34,6 @@ return {
 		saturation = 0.3,
 	},
 
-	-- socket
-	unix_domains = {
-		{
-			name = "unix",
-		},
-	},
-
-	-- This causes `wezterm` to act as though it was started as
-	-- `wezterm connect unix` by default, connecting to the unix
-	-- domain on startup.
-	-- If you prefer to connect manually, leave out this line.
-	default_gui_startup_args = { "connect", "unix" },
-
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		{ key = "=", mods = "SUPER", action = wezterm.action.IncreaseFontSize },
@@ -77,13 +64,33 @@ return {
 			key = "u",
 			mods = "LEADER|CTRL",
 			action = wezterm.action_callback(function(win, pane)
+
+                -- alternatives Ideas
+                -- workspaces are cool I like it, but the problem is when working with multiple projects
+                -- I dont like not being able to se the workspace name
+
 				-- here what I want have a project set or look for it
 				-- so need to interact with workspaces
 				--
 				-- so need a child process that runs fzf base on the list and return the name and directory
 				-- return as json {"name": "some name", "directory": "abs path", "group": "group"}
 				-- not sure what to do do with group yet but better to have it
-				-- local success, stdout, stderr = wezterm.run_child_process { 'ls', '-l' }
+                --
+                -- launch menu does not provide a workspace
+                -- other option for a new workspace with a command that open
+                -- problem does not spawn a terminal or nothing visible
+				-- local success, stdout, stderr = wezterm.run_child_process { 'bash', '/home/alpha/.cargo/bin/tshort' }
+                -- main problem user input thing
+
+                -- if success then
+                --     win:perform_action(act.SwitchToWorkspace({
+                --         name = "some test",
+                --         spawn = {
+                --             cwd = "/home/alpha/.dotfiles",
+                --             args = { "nvim" },
+                --         },
+                --     }), pane)
+                -- end
 				-- act.SwitchToWorkspace {
 				-- name = 'name',
 				-- spawn = {
