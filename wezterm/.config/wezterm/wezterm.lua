@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local act = wezterm.action
 
 wezterm.on("update-right-status", function(window)
 	window:set_right_status(window:active_workspace())
@@ -27,11 +26,11 @@ return {
 	color_scheme = "nightfox",
 
 	-- Background
-	window_background_image = wezterm.home_dir .. "/.config/wezterm/term_wallpaper.png",
+	window_background_image = wezterm.home_dir .. "/.config/wezterm/2.jpg",
 	window_background_image_hsb = {
-		brightness = 0.1,
-		hue = 0.65,
-		saturation = 0.3,
+		brightness = 0.2,
+		hue = 1,
+		saturation = 1,
 	},
 
 	default_prog = { "tmux", "new-session", "-A", "-s", "Main" },
