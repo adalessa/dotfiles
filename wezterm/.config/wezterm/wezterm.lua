@@ -28,7 +28,7 @@ return {
 	-- Background
 	window_background_image = wezterm.home_dir .. "/.config/wezterm/2.jpg",
 	window_background_image_hsb = {
-		brightness = 0.2,
+		brightness = 0.05,
 		hue = 1,
 		saturation = 1,
 	},
