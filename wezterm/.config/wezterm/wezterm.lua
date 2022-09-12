@@ -4,6 +4,12 @@ wezterm.on("update-right-status", function(window)
 	window:set_right_status(window:active_workspace())
 end)
 
+-- A helper function for my fallback fonts
+local function font_with_fallback(name, params)
+	local names = { name, "Noto Color Emoji", "JetBrains Mono" }
+	return wezterm.font_with_fallback(names, params)
+end
+
 return {
 	-- General configuration
 	audible_bell = "Disabled",
@@ -19,7 +25,21 @@ return {
 	},
 
 	-- Font and color scheme
-	font = wezterm.font("JetBrains Mono"),
+	font = font_with_fallback("JetBrainsMono Nerd Font"),
+	font_rules = {
+	-- 	-- Select a fancy italic font for italic text
+		{
+			italic = true,
+			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = 'Light', italic = true }),
+		},
+
+	-- 	-- Similarly, a fancy bold+italic font
+		{
+			italic = true,
+			intensity = "Bold",
+			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = 'ExtraBold', italic = true }),
+		},
+	},
 	font_size = 13,
 	use_resize_increments = true,
 	line_height = 1.0,
@@ -36,7 +56,7 @@ return {
 	default_prog = { "tmux", "new-session", "-A", "-s", "Main" },
 
 	-- leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
-    disable_default_key_bindings = true,
+	disable_default_key_bindings = true,
 	keys = {
 		{ key = "=", mods = "SUPER", action = wezterm.action.IncreaseFontSize },
 		{ key = "-", mods = "SUPER", action = wezterm.action.DecreaseFontSize },
@@ -69,9 +89,9 @@ return {
 		--	mods = "LEADER|CTRL",
 		--	action = wezterm.action_callback(function(win, pane)
 
-                ---- alternatives Ideas
-                ---- workspaces are cool I like it, but the problem is when working with multiple projects
-                ---- I dont like not being able to se the workspace name
+		---- alternatives Ideas
+		---- workspaces are cool I like it, but the problem is when working with multiple projects
+		---- I dont like not being able to se the workspace name
 
 		--		-- here what I want have a project set or look for it
 		--		-- so need to interact with workspaces
@@ -79,22 +99,22 @@ return {
 		--		-- so need a child process that runs fzf base on the list and return the name and directory
 		--		-- return as json {"name": "some name", "directory": "abs path", "group": "group"}
 		--		-- not sure what to do do with group yet but better to have it
-                ----
-                ---- launch menu does not provide a workspace
-                ---- other option for a new workspace with a command that open
-                ---- problem does not spawn a terminal or nothing visible
+		----
+		---- launch menu does not provide a workspace
+		---- other option for a new workspace with a command that open
+		---- problem does not spawn a terminal or nothing visible
 		--		-- local success, stdout, stderr = wezterm.run_child_process { 'bash', '/home/alpha/.cargo/bin/tshort' }
-                ---- main problem user input thing
+		---- main problem user input thing
 
-                ---- if success then
-                ----     win:perform_action(act.SwitchToWorkspace({
-                ----         name = "some test",
-                ----         spawn = {
-                ----             cwd = "/home/alpha/.dotfiles",
-                ----             args = { "nvim" },
-                ----         },
-                ----     }), pane)
-                ---- end
+		---- if success then
+		----     win:perform_action(act.SwitchToWorkspace({
+		----         name = "some test",
+		----         spawn = {
+		----             cwd = "/home/alpha/.dotfiles",
+		----             args = { "nvim" },
+		----         },
+		----     }), pane)
+		---- end
 		--		-- act.SwitchToWorkspace {
 		--		-- name = 'name',
 		--		-- spawn = {
@@ -102,7 +122,7 @@ return {
 		--		--   args = { 'nvim' },
 		--		-- },
 		--		-- },
-		--		-- very important this how to sync with other funciton perform action from window
+		--		-- very important this how to sync with other function perform action from window
 		--		-- win:perform_action(act.SwitchToWorkspace({
 		--		-- 	name = "some test",
 		--		-- 	spawn = {
