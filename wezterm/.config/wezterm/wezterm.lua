@@ -30,14 +30,14 @@ return {
 		-- Select a fancy italic font for italic text
 		{
 			italic = true,
-			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = 'Light', italic = true }),
+			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = "Light", italic = true }),
 		},
 
 		-- Similarly, a fancy bold+italic font
 		{
 			italic = true,
 			intensity = "Bold",
-			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = 'ExtraBold', italic = true }),
+			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = "ExtraBold", italic = true }),
 		},
 	},
 	font_size = 13,
