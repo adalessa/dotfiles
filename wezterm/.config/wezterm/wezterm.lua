@@ -44,14 +44,14 @@ return {
 	use_resize_increments = true,
 	line_height = 1.0,
 	color_scheme = "nightfox",
-
+    window_background_opacity = 0.8,
 	-- Background
-	window_background_image = wezterm.home_dir .. "/.config/wezterm/2.jpg",
-	window_background_image_hsb = {
-		brightness = 0.05,
-		hue = 1,
-		saturation = 1,
-	},
+	-- window_background_image = wezterm.home_dir .. "/.config/wezterm/2.jpg",
+	-- window_background_image_hsb = {
+	-- 	brightness = 0.05,
+	-- 	hue = 1,
+	-- 	saturation = 1,
+	-- },
 
 	default_prog = { "tmux", "new-session", "-A", "-s", "Main" },
 
