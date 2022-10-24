@@ -10,6 +10,13 @@ local function font_with_fallback(name, params)
 	return wezterm.font_with_fallback(names, params)
 end
 
+local fonts = {
+    "JetBrainsMono Nerd Font",
+    "VictorMono Nerd Font",
+};
+
+local font = fonts[2]
+
 return {
 	-- General configuration
 	audible_bell = "Disabled",
@@ -25,26 +32,26 @@ return {
 	},
 
 	-- Font and color scheme
-	font = font_with_fallback("JetBrainsMono Nerd Font"),
+	font = font_with_fallback(font, { weight = "Bold" }),
 	font_rules = {
 		-- Select a fancy italic font for italic text
 		{
 			italic = true,
-			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = "Light", italic = true }),
+			font = font_with_fallback(font, { weight = "Bold", italic = true }),
 		},
 
 		-- Similarly, a fancy bold+italic font
 		{
 			italic = true,
 			intensity = "Bold",
-			font = font_with_fallback("JetBrainsMono Nerd Font", { weight = "ExtraBold", italic = true }),
+			font = font_with_fallback(font, { weight = "ExtraBold", italic = true }),
 		},
 	},
 	font_size = 13,
 	use_resize_increments = true,
 	line_height = 1.0,
 	color_scheme = "Eqie6 (terminal.sexy)",
-    window_background_opacity = 0.8,
+    window_background_opacity = 0.9,
 	-- Background
 	-- window_background_image = wezterm.home_dir .. "/.config/wezterm/2.jpg",
 	-- window_background_image_hsb = {
