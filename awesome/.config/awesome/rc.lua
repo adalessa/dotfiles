@@ -55,7 +55,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "wezterm"
+local terminal = "kitty"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 
