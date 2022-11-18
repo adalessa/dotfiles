@@ -6,5 +6,6 @@
         "client",
         "root",
         "screen"
-    ]
+    ],
+    "Lua.workspace.checkThirdParty": false
 }
