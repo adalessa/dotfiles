@@ -246,13 +246,12 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup({
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
-            s.mylayoutbox,
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mytaglist,
@@ -265,6 +264,7 @@ awful.screen.connect_for_each_screen(function(s)
             require("widgets.battery_widget.battery"),
             wibox.widget.systray(),
             wibox.widget.textclock(),
+            s.mylayoutbox,
         },
     })
 end)
