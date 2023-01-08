@@ -111,7 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # source extra files
-for f in ~/.local/zsh/*; do source $f; done
+if [ -d "$HOME/.local/zsh" ] ; then
+    for f in ~/.local/zsh/*; do source $f; done
+fi
 
 alias ta='tmux attach'
 alias mine='sudo chown -R $USER:$USER .'

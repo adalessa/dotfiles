@@ -58,6 +58,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/default/theme
 local terminal = "kitty"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
+local browser = "firefox"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -322,6 +323,11 @@ local globalkeys = gears.table.join(
     awful.key({ modkey }, "Return", function()
         awful.spawn(terminal)
     end, { description = "open a terminal", group = "launcher" }),
+
+    awful.key({ modkey }, "b", function ()
+        awful.spawn(browser)
+    end, { description = "open the browser", group = "launcher" }),
+
     awful.key({ modkey, "Shift" }, "Return", function()
         awful.spawn(terminal .. ' -o font_size=23.0 -o adjust_line_height=100%')
     end, { description = "open a terminal", group = "launcher" }),
@@ -367,7 +373,7 @@ local globalkeys = gears.table.join(
     end, { description = "run prompt", group = "launcher" }),
 
     awful.key({ modkey }, "d", function()
-        awful.util.spawn("launcher")
+        awful.util.spawn("rofi -show run")
     end, { description = "launch rofi", group = "launcher" }),
 
     awful.key({ modkey }, "x", function()
