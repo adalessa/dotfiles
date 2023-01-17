@@ -2,7 +2,7 @@ pcall(require, "impatient")
 
 require("alpha.settings")
 require("alpha.keybindings")
-require("alpha.plugins")
+require("alpha.packer")
 
 require("alpha.globals")
 require("alpha.disable_builtin")

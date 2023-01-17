@@ -3,9 +3,11 @@ if require("alpha.packer_install")() then
 end
 
 vim.cmd.packadd("packer.nvim")
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.cmd([[autocmd BufWritePost packer.lua source <afile> | PackerCompile]])
 
 return require("packer").startup(function(use)
+	print("hola mundo")
+
 	local local_use = function(first, second, opts)
 		opts = opts or {}
 
@@ -29,6 +31,7 @@ return require("packer").startup(function(use)
 
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
+
 
 	use("jwalton512/vim-blade")
 
