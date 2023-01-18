@@ -1,6 +1,0 @@
-#!/bin/env sh
-
-killall -SIGUSR1 conky
-keyboard_speed
-sh ~/.screenlayout/default.sh
-nitrogen --restore
