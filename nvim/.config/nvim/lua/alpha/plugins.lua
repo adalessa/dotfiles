@@ -5,6 +5,13 @@ end
 vim.cmd.packadd("packer.nvim")
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
 
+-- packer in MacOS  keeps being stuck at :PackerSync if jobs are not limited.
+-- uncomment for OSX
+--local packer = require('packer')
+--packer.init {
+--    max_jobs = 5,
+--}
+
 return require("packer").startup(function(use)
 	local local_use = function(first, second, opts)
 		opts = opts or {}
