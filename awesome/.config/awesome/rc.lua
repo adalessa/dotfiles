@@ -131,7 +131,7 @@ local mymainmenu = awful.menu({
     items = {
         { "awesome", myawesomemenu, beautiful.awesome_icon },
         { "VPN", vpnmenu },
-        { "KB-speed", "keyboard-speed" },
+        { "KB-speed", "xset r rate 220 40" },
         { "Term", terminal },
         { "Projects", "tshort gui" },
         { "Tools", tools_menu },
