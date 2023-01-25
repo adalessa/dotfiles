@@ -17,6 +17,8 @@
     pkgs.php82Packages.phpcs
     pkgs.go
     pkgs.rustup
+    pkgs.nodejs
+    pkgs.nodePackages.npm
   ];
 
   # This value determines the Home Manager release that your
