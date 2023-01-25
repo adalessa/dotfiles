@@ -31,6 +31,11 @@ in {
     pkgs.rustup
     pkgs.nodejs
     pkgs.nodePackages.npm
+    pkgs.bat
+    pkgs.jq
+    pkgs.ripgrep
+    pkgs.tmux
+    pkgs.screenkey
   ];
 
   # This value determines the Home Manager release that your
