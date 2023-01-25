@@ -11,6 +11,12 @@
     pkgs.gpick
     pkgs.insomnia
     pkgs.lsd
+    pkgs.php82
+    pkgs.php82Packages.composer
+    pkgs.php82Packages.phpstan
+    pkgs.php82Packages.phpcs
+    pkgs.go
+    pkgs.rustup
   ];
 
   # This value determines the Home Manager release that your
