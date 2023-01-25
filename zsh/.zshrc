@@ -120,3 +120,5 @@ alias mine='sudo chown -R $USER:$USER .'
 alias "docker-compose -T"="docker-compose"
 alias ls=lsd
 alias sail='./vendor/bin/sail'
+
+source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
