@@ -15,3 +15,22 @@ Configuracion de:
 
 
 TO be Continued
+
+Home Manager configuration
+
+Install Nix
+Install home manager
+```
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
+
+Install gpu wrapper
+```
+nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl
+nix-channel --update
+```
+
+stow nix
+in home run `home-manager build` if no error use `home-manager switch`
