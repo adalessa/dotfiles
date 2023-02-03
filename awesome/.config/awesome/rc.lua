@@ -199,7 +199,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
+        gears.wallpaper.maximized(wallpaper, s, false)
     end
 end
 
@@ -373,7 +373,7 @@ local globalkeys = gears.table.join(
     end, { description = "run prompt", group = "launcher" }),
 
     awful.key({ modkey }, "d", function()
-        awful.util.spawn("rofi -show drun")
+        awful.util.spawn("rofi -show run")
     end, { description = "launch rofi", group = "launcher" }),
 
     awful.key({ modkey }, "x", function()
